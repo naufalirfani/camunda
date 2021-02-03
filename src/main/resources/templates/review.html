@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
- 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -28,83 +28,142 @@
 </head>
 
 <body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
     <!-- ============================================================== -->
-    <!-- main wrapper -->
+    <!-- navbar -->
     <!-- ============================================================== -->
-    <div class="dashboard-main-wrapper">
-        <!-- ============================================================== -->
-        <!-- navbar -->
-        <!-- ============================================================== -->
-        <div class="dashboard-header">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">Reimburse</a>
+    <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <a class="navbar-brand" href="index.html">Reimburse</a>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <div class="nav-left-sidebar sidebar-dark">
+        <div class="menu-list">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav flex-column">
+                        <!--                            <div>-->
+                        <!--                                <div class="image img-cir img-120">-->
+                        <!--                                    <img src="assets/image/avatar-1.jpg" alt="John Doe" />-->
+                        <!--                                </div>-->
+                        <!--                                <h4 class="name">john doe</h4>-->
+                        <!--                                <a href="#">Sign out</a>-->
+                        <!--                            </div>-->
+                        <li class="nav-divider">
+                            Menu
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html" ><i class="fa fa-fw fa-circle"></i>Dashboard</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="pengajuan.html"><i class="fa fa-fw fa-circle"></i>Pengajuan Reimburse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="list.html" ><i class="fa fa-fw fa-circle"></i>List Reimburse</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </div>
-        <!-- ============================================================== -->
-        <!-- end navbar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- left sidebar -->
-        <!-- ============================================================== -->
-        <div class="nav-left-sidebar sidebar-dark">
-            <div class="menu-list">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav flex-column">
-<!--                            <div>-->
-<!--                                <div class="image img-cir img-120">-->
-<!--                                    <img src="assets/image/avatar-1.jpg" alt="John Doe" />-->
-<!--                                </div>-->
-<!--                                <h4 class="name">john doe</h4>-->
-<!--                                <a href="#">Sign out</a>-->
-<!--                            </div>-->
-                            <li class="nav-divider">
-                                Menu
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.html" ><i class="fa fa-fw fa-circle"></i>Dashboard</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#"><i class="fa fa-fw fa-circle"></i>Pengajuan Reimburse</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="list.html" ><i class="fa fa-fw fa-circle"></i>List Reimburse</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#" ><i class="fa fa-fw fa-circle"></i>Review Reimburse</a>
-                            </li>
-                        </ul>
+    </div>
+</div>
+
+<main>
+    <div class="container mt-5">
+        <div class="row p-3 shadow-sm rounded bg-white my-3">
+            <h3>
+                <b>Data Reimburse</b>
+            </h3>
+        </div>
+
+        <div class="row justify-content-center pt-1 shadow-sm rounded bg-white">
+            <div class="col-12">
+                <div class="row p-3">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <th><b>Nama</b></th>
+                                <td>Wisnu</td>
+                            </tr>
+                            <tr>
+                                <th><b>Jumlah</b></th>
+                                <td>Rp. 100.000</td>
+                            </tr>
+                            <tr>
+                                <th><b>Keterangan</b></th>
+                                <td>Transport beli ATK</td>
+                            </tr>
+                            <tr>
+                                <th><b>Setuju?</b></th>
+                                <td>
+                                    <form method="post" action="">
+                                        <div class="mb-2">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="konfirmasi1" name="konfirmasi" class="custom-control-input">
+                                                <label class="custom-control-label" for="konfirmasi1">Ya</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-2">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="konfirmasi2" name="konfirmasi" class="custom-control-input">
+                                                <label class="custom-control-label" for="konfirmasi2">Tidak</label>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </nav>
+                </div>
             </div>
+
+            <button class="btn btn-danger ml-2 mb-3 p-2 float-left col-2" type="submit">
+                Cancel
+            </button>
+            <button class="btn btn-primary ml-2 mb-3 p-2 float-left col-2" type="submit">
+                Submit
+            </button>
+            <div class="col-7 mr-5"></div>
         </div>
     </div>
-
-    <h1 class="center-page" style="margin: auto">Menu Review Reimburse</h1>
-    <!-- ============================================================== -->
-    <!-- end main wrapper  -->
-    <!-- ============================================================== -->
-    <!-- Optional JavaScript -->
-    <!-- jquery 3.3.1 -->
-    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <!-- bootstap bundle js -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- slimscroll js -->
-    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-    <!-- main js -->
-    <script src="assets/libs/js/main-js.js"></script>
-    <!-- chart chartist js -->
-    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <!-- sparkline js -->
-    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <!-- morris js -->
-    <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
-    <!-- chart c3 js -->
-    <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="assets/libs/js/dashboard-ecommerce.js"></script>
+</main>
+<!-- ============================================================== -->
+<!-- end main wrapper  -->
+<!-- ============================================================== -->
+<!-- Optional JavaScript -->
+<!-- jquery 3.3.1 -->
+<script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+<!-- bootstap bundle js -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<!-- slimscroll js -->
+<script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+<!-- main js -->
+<script src="assets/libs/js/main-js.js"></script>
+<!-- chart chartist js -->
+<script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+<!-- sparkline js -->
+<script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+<!-- morris js -->
+<script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+<script src="assets/vendor/charts/morris-bundle/morris.js"></script>
+<!-- chart c3 js -->
+<script src="assets/vendor/charts/c3charts/c3.min.js"></script>
+<script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+<script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
+<script src="assets/libs/js/dashboard-ecommerce.js"></script>
 </body>
- 
+
 </html>

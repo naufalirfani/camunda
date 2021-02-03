@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
- 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -28,83 +28,152 @@
 </head>
 
 <body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
     <!-- ============================================================== -->
-    <!-- main wrapper -->
+    <!-- navbar -->
     <!-- ============================================================== -->
-    <div class="dashboard-main-wrapper">
-        <!-- ============================================================== -->
-        <!-- navbar -->
-        <!-- ============================================================== -->
-        <div class="dashboard-header">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">Reimburse</a>
+    <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <a class="navbar-brand" href="index.html">Reimburse</a>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <div class="nav-left-sidebar sidebar-dark">
+        <div class="menu-list">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav flex-column">
+                        <!--                            <div>-->
+                        <!--                                <div class="image img-cir img-120">-->
+                        <!--                                    <img src="assets/image/avatar-1.jpg" alt="John Doe" />-->
+                        <!--                                </div>-->
+                        <!--                                <h4 class="name">john doe</h4>-->
+                        <!--                                <a href="#">Sign out</a>-->
+                        <!--                            </div>-->
+                        <li class="nav-divider">
+                            Menu
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html" ><i class="fa fa-fw fa-circle"></i>Dashboard</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active" href="#"><i class="fa fa-fw fa-circle"></i>Pengajuan Reimburse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="list.html" ><i class="fa fa-fw fa-circle"></i>List Reimburse</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </div>
-        <!-- ============================================================== -->
-        <!-- end navbar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- left sidebar -->
-        <!-- ============================================================== -->
-        <div class="nav-left-sidebar sidebar-dark">
-            <div class="menu-list">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav flex-column">
-<!--                            <div>-->
-<!--                                <div class="image img-cir img-120">-->
-<!--                                    <img src="assets/image/avatar-1.jpg" alt="John Doe" />-->
-<!--                                </div>-->
-<!--                                <h4 class="name">john doe</h4>-->
-<!--                                <a href="#">Sign out</a>-->
-<!--                            </div>-->
-                            <li class="nav-divider">
-                                Menu
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.html" ><i class="fa fa-fw fa-circle"></i>Dashboard</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link active" href="#"><i class="fa fa-fw fa-circle"></i>Pengajuan Reimburse</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="list.html" ><i class="fa fa-fw fa-circle"></i>List Reimburse</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="review.html" ><i class="fa fa-fw fa-circle"></i>Review Reimburse</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+    </div>
+</div>
+
+<main>
+    <div class="container mt-5">
+        <div class="row p-3 shadow-sm rounded bg-white my-3">
+            <h3>
+                <b>Pengajuan Reimburse</b>
+            </h3>
+        </div>
+
+        <div class="row justify-content-center pt-1 shadow-sm rounded bg-white">
+            <div class="col">
+                <form method="post" action="">
+                    <div class="row">
+                        <div class="col-md-12 px-3">
+                            <div class="mb-3">
+                                <label for="nama"><b>Nama</b></label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="nama"
+                                        name="nama"
+                                        placeholder=""
+                                        value=""
+                                        required
+                                />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="jumlah"><b>Jumlah</b></label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="jumlah"
+                                        name="jumlah"
+                                        placeholder=""
+                                        value=""
+                                        required
+                                />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="keterangan"><b>Keterangan</b></label>
+                                <textarea
+                                        id="keterangan"
+                                        name="keterangan"
+                                        class="form-control"
+                                        placeholder=""
+                                        value=""
+                                        required>
+                    </textarea>
+                            </div>
+                        </div>
+                        <hr class="mb-4" />
+
+                        <div class="row pl-4">
+                            <input type="hidden" name="" value="" />
+                            <button
+                                    class="btn btn-danger mb-3 ml-2 p-2 pl-5 pr-5 float-left col"
+                                    type="submit"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                    class="btn btn-primary mb-3 ml-2 p-2 pl-5 pr-5 float-left col"
+                                    type="submit"
+                            >
+                                Submit
+                            </button>
+                        </div>
+                </form>
             </div>
         </div>
     </div>
-
-    <h1 class="center-page" style="margin: auto">Menu Pengajuan Reimburse</h1>
-    <!-- ============================================================== -->
-    <!-- end main wrapper  -->
-    <!-- ============================================================== -->
-    <!-- Optional JavaScript -->
-    <!-- jquery 3.3.1 -->
-    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <!-- bootstap bundle js -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- slimscroll js -->
-    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-    <!-- main js -->
-    <script src="assets/libs/js/main-js.js"></script>
-    <!-- chart chartist js -->
-    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <!-- sparkline js -->
-    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <!-- morris js -->
-    <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
-    <!-- chart c3 js -->
-    <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="assets/libs/js/dashboard-ecommerce.js"></script>
+</main>
+<!-- ============================================================== -->
+<!-- end main wrapper  -->
+<!-- ============================================================== -->
+<!-- Optional JavaScript -->
+<!-- jquery 3.3.1 -->
+<script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+<!-- bootstap bundle js -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<!-- slimscroll js -->
+<script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+<!-- main js -->
+<script src="assets/libs/js/main-js.js"></script>
+<!-- chart chartist js -->
+<script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+<!-- sparkline js -->
+<script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+<!-- morris js -->
+<script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+<script src="assets/vendor/charts/morris-bundle/morris.js"></script>
+<!-- chart c3 js -->
+<script src="assets/vendor/charts/c3charts/c3.min.js"></script>
+<script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+<script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
+<script src="assets/libs/js/dashboard-ecommerce.js"></script>
 </body>
- 
+
 </html>
