@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org " lang="en">
 
 <head>
     <!-- Required meta tags -->
@@ -62,10 +63,10 @@
                             Menu
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html" ><i class="fa fa-fw fa-circle"></i>Dashboard</a>
+                            <a class="nav-link" href="/index" ><i class="fa fa-fw fa-circle"></i>Dashboard</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="pengajuan.html"><i class="fa fa-fw fa-circle"></i>Pengajuan Reimburse</a>
+                            <a class="nav-link" href="/pengajuan"><i class="fa fa-fw fa-circle"></i>Pengajuan Reimburse</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="#" ><i class="fa fa-fw fa-circle"></i>List Reimburse</a>
@@ -77,7 +78,7 @@
     </div>
 </div>
 
-<main>
+<main class="class= col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pr-xl-0 pr-lg-0 pr-md-0  m-b-30" style=" margin: auto">
     <div class="container mt-5">
         <div class="row p-3 shadow-sm rounded bg-white my-3">
             <h3>
@@ -91,23 +92,24 @@
                     <thead>
                     <tr>
                         <td><b>id</b></td>
-                        <td><b>Nama</b></td>
+                        <td><b>Created</b></td>
                         <td><b>Keterangan</b></td>
                         <td><b>Next Steps</b></td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr class="border"></tr>
-                    <tr>
-                        <td>1</td>
-                        <td>nama</td>
-                        <td>keterangan</td>
+                    <tr th:each="dataEmployee,iter :${employeeList}">
+                        <td th:text="${dataEmployee.getId()}"></td>
+                        <td th:text="${dataEmployee.getCreated()}"></td>
+                        <td th:text="${dataEmployee.getName()}"></td>
                         <td>
-                            <a href="review.html">
-                                <button class="btn btn-outline-primary px-3 py-1">
-                                    Reveiw/inputbukti
-                                </button>
-                            </a>
+                            <form action="#" th:action="@{/review}" method="get">
+                                <button class="btn btn-outline-primary px-3 py-1"
+                                        name="buttonList"
+                                        th:value="${dataEmployee.getId()}"
+                                        th:text="${dataEmployee.getName()}">
+                            </form>
                         </td>
                     </tr>
                     </tbody>
@@ -121,6 +123,7 @@
 <!-- ============================================================== -->
 <!-- Optional JavaScript -->
 <!-- jquery 3.3.1 -->
+<script>alert ("This is a warning message!");</script>
 <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
 <!-- bootstap bundle js -->
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>

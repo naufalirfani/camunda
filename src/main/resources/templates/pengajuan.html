@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <!-- Required meta tags -->
@@ -62,13 +62,14 @@
                             Menu
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html" ><i class="fa fa-fw fa-circle"></i>Dashboard</a>
+                            <a class="nav-link" href="/index" ><i class="fa fa-fw fa-circle"></i>Dashboard</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link active" href="#"><i class="fa fa-fw fa-circle"></i>Pengajuan Reimburse</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="list.html" ><i class="fa fa-fw fa-circle"></i>List Reimburse</a>
+
+                            <a class="nav-link" href="http://localhost:8080/list"><i class="fa fa-fw fa-circle"></i>List Reimburse</a>
                         </li>
                     </ul>
                 </div>
@@ -77,8 +78,8 @@
     </div>
 </div>
 
-<main>
-    <div class="container mt-5">
+<main class="class= col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pr-xl-0 pr-lg-0 pr-md-0  m-b-30" style=" margin: auto">
+    <div >
         <div class="row p-3 shadow-sm rounded bg-white my-3">
             <h3>
                 <b>Pengajuan Reimburse</b>
@@ -87,28 +88,27 @@
 
         <div class="row justify-content-center pt-1 shadow-sm rounded bg-white">
             <div class="col">
-                <form method="post" action="">
+                <form action="#" th:action="@{/pengajuan}" method="post">
                     <div class="row">
                         <div class="col-md-12 px-3">
                             <div class="mb-3">
-                                <label for="nama"><b>Nama</b></label>
+                                <label for="namaField"><b>Nama</b></label>
                                 <input
                                         type="text"
                                         class="form-control"
-                                        id="nama"
+                                        id="namaField"
                                         name="nama"
-                                        placeholder=""
                                         value=""
                                         required
                                 />
                             </div>
 
                             <div class="mb-3">
-                                <label for="jumlah"><b>Jumlah</b></label>
+                                <label for="jumlahField"><b>Jumlah</b></label>
                                 <input
-                                        type="text"
+                                        type="number"
                                         class="form-control"
-                                        id="jumlah"
+                                        id="jumlahField"
                                         name="jumlah"
                                         placeholder=""
                                         value=""
@@ -117,15 +117,13 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="keterangan"><b>Keterangan</b></label>
-                                <textarea
-                                        id="keterangan"
+                                <label for="keteranganField"><b>Keterangan</b></label>
+                                <input
+                                        id="keteranganField"
                                         name="keterangan"
                                         class="form-control"
                                         placeholder=""
-                                        value=""
                                         required>
-                    </textarea>
                             </div>
                         </div>
                         <hr class="mb-4" />
@@ -145,6 +143,7 @@
                                 Submit
                             </button>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
