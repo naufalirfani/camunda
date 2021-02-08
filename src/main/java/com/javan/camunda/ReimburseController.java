@@ -2,6 +2,8 @@ package com.javan.camunda;
 
 import com.javan.camunda.api.ApiClient;
 import com.javan.camunda.api.IApiService;
+import com.javan.camunda.data.PenolakanBody;
+import com.javan.camunda.data.ReviewBody;
 import com.javan.camunda.data.StartResponse;
 import com.javan.camunda.data.TaskResponse;
 import com.javan.camunda.data.startbody.*;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import javax.swing.JOptionPane;
 
 import java.util.List;
 
@@ -26,23 +27,23 @@ public class ReimburseController {
     TaskVariableResponse taskVariableResponse;
 
     @GetMapping("/index")
-    private String getDashboard(){
+    public String getDashboard(){
         return "index";
     }
 
     @GetMapping("/pengajuan")
-    private String getstartTask(){
+    public String getstartTask(){
         return "pengajuan";
     }
 
-    @RequestMapping("/list")
-    private String getListTask(Model model){
+    @GetMapping("/list")
+    public String getListTask(Model model){
         getListReimburse();
         model.addAttribute("employeeList", hasil);
         return "list";
     }
 
-    private void getListReimburse(){
+    public void getListReimburse(){
         iApiService.getListTask()
                 .enqueue(new Callback<List<TaskResponse>>() {
                     @Override
@@ -61,7 +62,8 @@ public class ReimburseController {
     }
 
     @GetMapping("/review")
-    private String getReviewTask(Model model, @RequestParam(value = "buttonList") String taskId){
+    public String getReviewTask(Model model,
+                                @RequestParam(value = "buttonList") String taskId){
         getTaskVariabel(taskId);
         model.addAttribute("variable", taskVariableResponse);
         model.addAttribute("taskId", taskId);
@@ -87,8 +89,14 @@ public class ReimburseController {
 
     }
 
+    @GetMapping("/penolakan")
+    public String getPenolakan(Model model, @RequestParam(value = "buttonList") String taskId){
+        model.addAttribute("taskId", taskId);
+        return "penolakan";
+    }
+
     @PostMapping("/pengajuan")
-    private String postStartTask(@RequestParam(value = "nama", defaultValue = "") String nama,
+    public String postStartTask(@RequestParam(value = "nama", defaultValue = "") String nama,
                                  @RequestParam(value = "jumlah", defaultValue = "0") int jumlah,
                                  @RequestParam(value = "keterangan", defaultValue = "") String keterangan){
 
@@ -115,38 +123,65 @@ public class ReimburseController {
     }
 
     @PostMapping("/list")
-    private String postReviewTask(@RequestParam(value = "konfirmasi") String konfirmasi,
-                                  @RequestParam(value = "taskId") String taskId,
+    public String postReviewTask(@RequestParam(value = "konfirmasi", defaultValue = "") String konfirmasi,
+                                  @RequestParam(value = "taskId", defaultValue = "") String taskId,
+                                 @RequestParam(value = "taskName", defaultValue = "") String taskName,
                                   Model model){
 
-        if(!taskId.equals("")){
-            boolean value;
-            value = konfirmasi.equals("ya");
-            VariablesReview variablesReview = new VariablesReview(new IsApproved("Boolean", value));
-            ReviewBody reviewBody = new ReviewBody(variablesReview);
-            iApiService.postReview("http://localhost:8081/engine-rest/task/"+ taskId + "/submit-form", reviewBody)
-                    .enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable throwable) {
-                            responses = throwable.toString();
-                        }
-                    });
-        }
-        else{
-            JOptionPane.showMessageDialog(null,
-                    "ALERT MESSAGE",
-                    "TITLE",
-                    JOptionPane.WARNING_MESSAGE);
+        if(!taskId.equals("") && !konfirmasi.equals("")){
+            switch (taskName){
+                case "review":
+                    submitReview(konfirmasi, taskId);
+                    break;
+                case "penolakan":
+                    submitPenolakan(konfirmasi, taskId);
+                    break;
+                default:
+                    break;
+            }
         }
         getListReimburse2();
         model.addAttribute("employeeList", hasil2);
 
-        return "list";
+        return "index";
+    }
+
+    private void submitReview(String konfirmasi, String taskId){
+        boolean value;
+        value = konfirmasi.equals("ya");
+        VariablesReview variablesReview = new VariablesReview(new IsApproved("Boolean", value));
+        ReviewBody reviewBody = new ReviewBody(variablesReview);
+        iApiService.postReview("http://localhost:8081/engine-rest/task/"+ taskId + "/submit-form", reviewBody)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        //Success
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable throwable) {
+                        responses = throwable.toString();
+                    }
+                });
+    }
+
+    private void submitPenolakan(String keterangan, String taskId){
+        VariablesPenolakan variablesPenolakan = new VariablesPenolakan(new Keterangan("String", keterangan));
+        PenolakanBody penolakanBody = new PenolakanBody(variablesPenolakan);
+        iApiService.postPenolakan("http://localhost:8081/engine-rest/task/"+ taskId + "/submit-form", penolakanBody)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        //Success
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable throwable) {
+                        responses = throwable.toString();
+                    }
+                });
     }
 
     private void getListReimburse2(){

@@ -104,12 +104,33 @@
                         <td th:text="${dataEmployee.getCreated()}"></td>
                         <td th:text="${dataEmployee.getName()}"></td>
                         <td>
-                            <form action="#" th:action="@{/review}" method="get">
-                                <button class="btn btn-outline-primary px-3 py-1"
-                                        name="buttonList"
-                                        th:value="${dataEmployee.getId()}"
-                                        th:text="${dataEmployee.getName()}">
-                            </form>
+                            <span th:if="${dataEmployee.getName() == 'Review'}">
+                                <form action="#" th:action="@{/review}" method="get">
+                                    <button class="btn btn-outline-primary px-3 py-1"
+                                            name="buttonList"
+                                            th:value="${dataEmployee.getId()}"
+                                            th:text="${dataEmployee.getName()}">
+                                    </button>
+                                </form>
+                            </span>
+                            <span th:if="${dataEmployee.getName() == 'Input Bukti Transfer'}">
+                                <form action="#" th:action="@{/bukti}" method="get">
+                                    <button class="btn btn-outline-primary px-3 py-1"
+                                            name="buttonList"
+                                            th:value="${dataEmployee.getId()}"
+                                            th:text="${dataEmployee.getName()}">
+                                    </button>
+                                </form>
+                            </span>
+                            <span th:if="${dataEmployee.getName() == 'Input Alasan Penolakan'}">
+                                <form action="#" th:action="@{/penolakan}" method="get">
+                                    <button class="btn btn-outline-primary px-3 py-1"
+                                            name="buttonList"
+                                            th:value="${dataEmployee.getId()}"
+                                            th:text="${dataEmployee.getName()}">
+                                    </button>
+                                </form>
+                            </span>
                         </td>
                     </tr>
                     </tbody>
@@ -123,7 +144,6 @@
 <!-- ============================================================== -->
 <!-- Optional JavaScript -->
 <!-- jquery 3.3.1 -->
-<script>alert ("This is a warning message!");</script>
 <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
 <!-- bootstap bundle js -->
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>

@@ -1,6 +1,7 @@
-package com.javan.camunda.data.startbody;
+package com.javan.camunda.data;
 
 import com.google.gson.annotations.SerializedName;
+import com.javan.camunda.data.startbody.VariablesReview;
 
 public class ReviewBody {
 

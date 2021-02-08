@@ -1,10 +1,7 @@
 package com.javan.camunda.api;
 
-import com.javan.camunda.data.ProcessDefinitionResponse;
-import com.javan.camunda.data.TaskResponse;
-import com.javan.camunda.data.startbody.ReviewBody;
+import com.javan.camunda.data.*;
 import com.javan.camunda.data.startbody.StartBody;
-import com.javan.camunda.data.StartResponse;
 import com.javan.camunda.data.taskVariable.TaskVariableResponse;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -27,4 +24,7 @@ public interface IApiService {
 
     @POST
     Call<String> postReview(@Url String url, @Body ReviewBody reviewBody);
+
+    @POST
+    Call<String> postPenolakan(@Url String url, @Body PenolakanBody penolakanBody);
 }
