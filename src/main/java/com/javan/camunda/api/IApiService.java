@@ -27,4 +27,7 @@ public interface IApiService {
 
     @POST
     Call<String> postPenolakan(@Url String url, @Body PenolakanBody penolakanBody);
+
+    @POST
+    Call<String> uploadBukti(@Url String url, @Body BuktiBody buktiBody);
 }

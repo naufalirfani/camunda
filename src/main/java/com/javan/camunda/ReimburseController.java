@@ -2,19 +2,23 @@ package com.javan.camunda;
 
 import com.javan.camunda.api.ApiClient;
 import com.javan.camunda.api.IApiService;
-import com.javan.camunda.data.PenolakanBody;
-import com.javan.camunda.data.ReviewBody;
-import com.javan.camunda.data.StartResponse;
-import com.javan.camunda.data.TaskResponse;
+import com.javan.camunda.data.*;
 import com.javan.camunda.data.startbody.*;
 import com.javan.camunda.data.taskVariable.TaskVariableResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Controller
@@ -93,6 +97,12 @@ public class ReimburseController {
     public String getPenolakan(Model model, @RequestParam(value = "buttonList") String taskId){
         model.addAttribute("taskId", taskId);
         return "penolakan";
+    }
+
+    @GetMapping("/bukti")
+    public String getBukti(Model model, @RequestParam(value = "buttonList") String taskId){
+        model.addAttribute("taskId", taskId);
+        return "bukti";
     }
 
     @PostMapping("/pengajuan")
@@ -200,5 +210,42 @@ public class ReimburseController {
 
         if(hasil2 == null)
             getListReimburse2();
+    }
+
+    @PostMapping("/imageUpload")
+    public String image(@RequestParam("image") MultipartFile imagefile,
+                        @RequestParam(value = "taskId", defaultValue = "") String taskId){
+
+        String path = "D:\\Naufal\\Dokumen\\KP\\Javan\\camunda\\Bukti\\";
+        var fileName = imagefile.getOriginalFilename();
+        try {
+            var is = imagefile.getInputStream();
+
+            Files.copy(is, Paths.get(path + fileName),
+                    StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        String imageUrl = path + fileName;
+        submitBukti(imageUrl, taskId);
+        return "index";
+    }
+
+    private void submitBukti(String imageUrl, String taskId){
+        VariablesBukti variablesBukti = new VariablesBukti(new ImageUrl("String", imageUrl));
+        BuktiBody buktiBody = new BuktiBody(variablesBukti);
+        iApiService.uploadBukti("http://localhost:8081/engine-rest/task/"+ taskId + "/submit-form", buktiBody)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        //Success
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable throwable) {
+                        responses = throwable.toString();
+                    }
+                });
     }
 }
