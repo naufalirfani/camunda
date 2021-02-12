@@ -1,25 +1,38 @@
 package com.javan.camunda;
 
+import ch.qos.logback.core.joran.util.beans.BeanDescriptionFactory;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javan.camunda.api.ApiClient;
 import com.javan.camunda.api.IApiService;
 import com.javan.camunda.data.*;
 import com.javan.camunda.data.startbody.*;
 import com.javan.camunda.data.taskVariable.TaskVariableResponse;
+import eu.dattri.jsonbodyhandler.JsonBodyHandler;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Scanner;
 
 @Controller
 public class ReimburseController {
@@ -29,6 +42,8 @@ public class ReimburseController {
     List<TaskResponse> hasil;
     List<TaskResponse> hasil2;
     TaskVariableResponse taskVariableResponse;
+    CloseableHttpClient httpclient = HttpClients.createDefault();
+    HttpGet httpget = new HttpGet("http://localhost:8081/engine-rest/task");
 
     @GetMapping("/index")
     public String getDashboard(){
@@ -41,28 +56,22 @@ public class ReimburseController {
     }
 
     @GetMapping("/list")
-    public String getListTask(Model model){
+    public String getListTask(Model model) throws IOException {
         getListReimburse();
         model.addAttribute("employeeList", hasil);
         return "list";
     }
 
-    public void getListReimburse(){
-        iApiService.getListTask()
-                .enqueue(new Callback<List<TaskResponse>>() {
-                    @Override
-                    public void onResponse(Call<List<TaskResponse>> call, Response<List<TaskResponse>> response) {
-                        hasil =  response.body();
-                    }
+    public void getListReimburse() throws IOException {
+        
+        //Executing the Get request
+        HttpResponse httpresponse = httpclient.execute(httpget);
 
-                    @Override
-                    public void onFailure(Call<List<TaskResponse>> call, Throwable throwable) {
-                        responses = throwable.toString();
-                    }
-                });
+        Scanner sc = new Scanner(httpresponse.getEntity().getContent());
 
-        if(hasil == null)
-            getListReimburse();
+        ObjectMapper mapper = new ObjectMapper();
+        List<TaskResponse> taskResponseList = mapper.readValue(sc.nextLine(), new TypeReference<List<TaskResponse>>(){});
+        hasil = taskResponseList;
     }
 
     @GetMapping("/review")
@@ -136,7 +145,7 @@ public class ReimburseController {
     public String postReviewTask(@RequestParam(value = "konfirmasi", defaultValue = "") String konfirmasi,
                                   @RequestParam(value = "taskId", defaultValue = "") String taskId,
                                  @RequestParam(value = "taskName", defaultValue = "") String taskName,
-                                  Model model){
+                                  Model model) throws IOException {
 
         if(!taskId.equals("") && !konfirmasi.equals("")){
             switch (taskName){
@@ -194,22 +203,16 @@ public class ReimburseController {
                 });
     }
 
-    private void getListReimburse2(){
-        iApiService.getListTask()
-                .enqueue(new Callback<List<TaskResponse>>() {
-                    @Override
-                    public void onResponse(Call<List<TaskResponse>> call, Response<List<TaskResponse>> response) {
-                        hasil2 =  response.body();
-                    }
+    private void getListReimburse2() throws IOException {
+        //Executing the Get request
+        HttpResponse httpresponse = httpclient.execute(httpget);
 
-                    @Override
-                    public void onFailure(Call<List<TaskResponse>> call, Throwable throwable) {
-                        responses = throwable.toString();
-                    }
-                });
+        Scanner sc = new Scanner(httpresponse.getEntity().getContent());
 
-        if(hasil2 == null)
-            getListReimburse2();
+        ObjectMapper mapper = new ObjectMapper();
+        List<TaskResponse> taskResponseList = mapper.readValue(sc.nextLine(), new TypeReference<>() {
+        });
+        hasil2 = taskResponseList;
     }
 
     @PostMapping("/imageUpload")
